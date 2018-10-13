@@ -3,18 +3,78 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" type=text/css href="assets/css/style.css">
+    <!-- <meta http-equiv="X-UA-Compatible" content="ie=edge"> -->
+    <!-- <link rel="stylesheet" type=text/css href="assets/css/style.css"> -->
+    <link type="text/javascript" src="assets/javascript/game.js">
     <title>Psychic-game</title>
 </head>
 <body>
 
+<script src="assets/js/game.js">
+
+var alphabet
+
+var numGuess= 10;  
+var userGuessed=[]; 
+var loseCounter=[0]; 
+var winCounter=[0]; 
 
 
+var amountOfGuess=numGuess;
 
 
-
+    document.onkeyup = function(event) {
+	var userGuess = String.fromCharCode(event.keyCode).toLowerCase();
+	var computerGuess=randomizer(alphabet);
+		
+	if (userGuess== computerGuess) {
+		console.log("correct", userGuessed);
+		document.getElementById("winCounter").innerHTML= (winCounter.length);
+		userGuessed.push(userGuess);
+		document.getElementById("userGuessed").innerHTML=(userGuessed);
+        (winCounter+=1);
+        
+	} else {
+		console.log("no", numGuess, userGuessed);
+		document.getElementById("loseCounter").innerHTML= (loseCounter.length);
+		userGuessed.push(userGuess);
+		document.getElementById("userGuessed").innerHTML=(userGuessed);
+		numGuess--;
+		document.getElementById("numGuess").innerHTML=(numGuess)};	
+   
     
-    <script src="assets/js/script.js"></script>
+	if (numGuess===0 ) {
+        reset.resetGame() 
+		loseCounter+=1;
+		userGuessed=[];
+	};
+}
+
+</script>
+
+<div id="wrap">
+        <h1 class="title">Psychic Game</h1>
+        
+        <h2>Guess What Letter I'm thinking of. (Press any letter to begin)</h2>
+
+			<h2>Wins:</h2>
+				<h3 id="winCounter"></h3>
+					
+						<h2 class="losses premade">Losses:</h2>
+						<h3 id="loseCounter"></h3>
+		
+						<h2 class="guesses premade">Guesses Left:</h2>
+						<h3 id="numGuess"></h3>
+				
+						<h2>Letters guessed so far:</h2>
+						<h3 id="userGuessed"></h3>
+					</div>
+	
 </body>
 </html>
+
+
+<!--   when the player guesses the same letter as the psychic, their wins go up by 1 and the games left resets back to 9  -->
+
+
+          
